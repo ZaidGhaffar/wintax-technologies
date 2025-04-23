@@ -8,8 +8,11 @@ import { AnimatedBeamDemo } from "@/components/animated-beam"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
 import { AboutSection } from "@/components/about-section"
+import  TimeSavingSection from "@/components/time-saving-section"
 import Drone3 from "@/public/Drone-3.png"
-import TimeSavingSection from "@/components/time-saving-section"
+import Navbar from "@/components/responsive-navbar"
+
+import WhatWeDoSection from "@/components/what-we-do-section"
 
 
 export default function Home() {
@@ -18,47 +21,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="container mx-auto flex items-center justify-between py-4 px-6">
-        <div className="flex items-center gap-2">
-          <div className="bg-blue-500 rounded-full p-1.5">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M13 3L4 14H15L11 21"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <span className="font-bold text-xl">Boltshift</span>
-        </div>
-
-        <div className="hidden md:flex items-center space-x-6 bg-[#F4F4F4] px-4 py-2 rounded-full">
-          <a href="#" className="text-gray-700 hover:text-gray-900">
-            Benefits
-          </a>
-          <a href="#" className="text-gray-700 hover:text-gray-900">
-            How it works
-          </a>
-          <a href="#" className="text-gray-700 hover:text-gray-900">
-            Privacy
-          </a>
-          <a href="#" className="text-gray-700 hover:text-gray-900">
-            Industries
-          </a>
-          <a href="#" className="text-gray-700 hover:text-gray-900">
-            Who we are
-          </a>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <Button variant="outline" className="rounded-full">
-            Log in
-          </Button>
-          <Button className="bg-gray-900 text-white hover:bg-gray-800 rounded-full">Request early access</Button>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero Section */}
       <section className="container mx-auto px-6 py-12">
@@ -195,6 +158,7 @@ export default function Home() {
           <AnimatedBeamDemo />
         </div>
       </section>
+      <WhatWeDoSection />
       <TimeSavingSection />
       <AboutSection />
       <ContactSection />
