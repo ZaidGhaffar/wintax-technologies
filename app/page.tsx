@@ -11,6 +11,7 @@ import { AboutSection } from "@/components/about-section"
 import  TimeSavingSection from "@/components/time-saving-section"
 import Drone3 from "@/public/Drone-3.png"
 import Navbar from "@/components/responsive-navbar"
+import { TestimonialsSection } from "@/components/testimonials-with-marquee"
 
 import WhatWeDoSection from "@/components/what-we-do-section"
 
@@ -161,7 +162,40 @@ export default function Home() {
       <WhatWeDoSection />
       <TimeSavingSection />
       <AboutSection />
+      <TestimonialsSection 
+        title="What Our Clients Say"
+        description="Discover why businesses trust us with their software development needs"
+        testimonials={[
+          {
+            author: {
+              name: "Sarah Johnson",
+              handle: "@sarah_techcorp",
+              avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
+            },
+            text: "Working with this team has been transformative for our business. Their expertise in AI and automation has helped us achieve remarkable efficiency gains."
+          },
+          {
+            author: {
+              name: "Michael Chen",
+              handle: "@mchen_innovate",
+              avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+            },
+            text: "The quality of work and attention to detail is outstanding. They don't just write code, they provide solutions that drive real business value."
+          },
+          {
+            author: {
+              name: "Emily Rodriguez",
+              handle: "@emily_digital",
+              avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face"
+            },
+            text: "Their ability to understand our business needs and translate them into elegant technical solutions has been impressive. Highly recommended!"
+          }
+        ]}
+      />
+
+      
       <ContactSection />
+      
       <Footer />
       
     </div>
