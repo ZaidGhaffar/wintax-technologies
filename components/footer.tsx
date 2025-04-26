@@ -105,7 +105,7 @@ export function Footer() {
             </p>
             <div className="flex space-x-2">
               <Input placeholder="Your email" type="email" />
-              <Button>Subscribe</Button>
+              <Button className="bg-black text-white">Subscribe</Button>
             </div>
           </div>
         </div>

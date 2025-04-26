@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useEffect, useState } from "react"
 import Image from "next/image"
 import { Play, ArrowRight, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -12,12 +12,78 @@ import  TimeSavingSection from "@/components/time-saving-section"
 import Drone3 from "@/public/Drone-3.png"
 import Navbar from "@/components/responsive-navbar"
 import { TestimonialsSection } from "@/components/testimonials-with-marquee"
+import ImageCarousel from "@/components/image-carousel"
 
 import WhatWeDoSection from "@/components/what-we-do-section"
 
+// CountUp hook for integer and time values
+interface UseCountUpProps {
+  end: number;
+  duration?: number;
+  isTime?: boolean;
+}
+function useCountUp({ end, duration = 800, isTime = false }: UseCountUpProps) {
+  const [value, setValue] = useState(0)
+  useEffect(() => {
+    let start = 0
+    let raf: number
+    const startTime = performance.now()
+    const animate = (now: number) => {
+      const elapsed = now - startTime
+      const progress = Math.min(elapsed / duration, 1)
+      if (isTime) {
+        // end is in seconds
+        setValue(Math.floor(progress * end))
+      } else {
+        setValue(Math.floor(progress * end))
+      }
+      if (progress < 1) {
+        raf = requestAnimationFrame(animate)
+      } else {
+        setValue(end)
+      }
+    }
+    raf = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(raf)
+  }, [end, duration, isTime])
+  if (isTime) {
+    // Format as mm:ss
+    const mins = Math.floor(value / 60)
+    const secs = value % 60
+    return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`
+  }
+  return value
+}
+
+// Custom hook for live timer in HH:MM:SS
+function useLiveTimer(initialSeconds: number) {
+  const [seconds, setSeconds] = useState(initialSeconds)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds((s) => s + 1)
+    }, 100)
+    return () => clearInterval(interval)
+  }, [])
+  // Format as HH:MM:SS
+  const hrs = Math.floor(seconds / 3600)
+  const mins = Math.floor((seconds % 3600) / 60)
+  const secs = seconds % 60
+  return `${String(hrs).padStart(2, "0")}:${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`
+}
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null)
+
+  // Initial times in seconds
+  const step2Start = 13 * 60 + 22 // 00:13:22
+  const step3Start = 15 * 60 + 34 // 00:15:34
+  const processTimeStart = 25 * 60 + 5 // 00:25:05
+  const totalTimeStart = 26 * 60 + 27 // 00:26:27
+
+  const step2Timer = useLiveTimer(step2Start)
+  const step3Timer = useLiveTimer(step3Start)
+  const processTimer = useLiveTimer(processTimeStart)
+  const totalTimer = useLiveTimer(totalTimeStart)
 
   return (
     <div className="min-h-screen bg-white">
@@ -44,7 +110,7 @@ export default function Home() {
             {/* Main Heading */}
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                Reveal a fresh dimension of efficiency within your Projects
+              We help companies redefine the future through technology
                 <span className="inline-flex items-center ml-2 px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">
                   AI based platform
                 </span>
@@ -59,7 +125,7 @@ export default function Home() {
             {/* CTA Buttons */}
             <div className="flex items-center gap-4">
               <Button className="bg-blue-500 hover:bg-blue-600 text-white rounded-full px-6">
-                Request early access
+                Get in Touch
               </Button>
               <a href="#" className="flex items-center text-gray-700 hover:text-gray-900">
                 Learn more <ArrowRight size={16} className="ml-1" />
@@ -99,53 +165,43 @@ export default function Home() {
           </div>
 
           {/* Right Column */}
-          <div className="relative" ref={containerRef}>
-            {/* Counter Card */}
-            <div className="absolute -top-4 right-4 md:top-0 md:right-2 bg-white bg-opacity-70 backdrop-blur-sm p-4 rounded-xl shadow-sm z-10 pt-6 pr-16 p-4">
-              <div className="flex items-end gap-2">
-                <span className="text-4xl font-bold">572</span>
-                <span className="text-green-500 text-sm font-semibold">10%+</span>
-              </div>
-              <div className="text-sm text-gray-400 font-light">Satisfied customers</div>
-            </div>
-
-            {/* Main Image with Annotations */}
+          <div className="relative pt-12 pb-12" ref={containerRef}>
+            {/* Main Image Carousel with Annotations */}
             <div className="relative rounded-xl overflow-hidden border border-gray-200">
-              <div className="aspect-[4/3] relative">
-                <Image
-                  src={Drone3}
-                  alt="Worker on assembly line"
-                  fill
-                  className="object-cover"
-                />
-
-                {/* Process Time and Total Time - Now with glass effect */}
-                <div className="absolute bottom-4 right-4 flex flex-col gap-2">
-                  <div className="bg-white bg-opacity-70 backdrop-blur-sm rounded-lg shadow-sm p-2 text-sm">
-                    <div className="font-semibold">
-                      Process time: <span className="text-gray-700">00:25:05</span>
-                    </div>
-                  </div>
-                  <div className="bg-white bg-opacity-70 backdrop-blur-sm rounded-lg shadow-sm p-2 text-sm">
-                    <div className="font-semibold">
-                      Total time: <span className="text-gray-700">00:26:27</span>
-                    </div>
+              <ImageCarousel />
+              {/* Floating Counter Card - fixed at top-right over carousel */}
+              <div className="absolute top-4 right-4 bg-white bg-opacity-70 backdrop-blur-sm p-4 rounded-xl shadow-sm z-30">
+                <div className="flex items-end gap-2 pr-8">
+                  <span className="text-4xl font-bold">{useCountUp({ end: 572, duration: 1200 })}</span>
+                  <span className="text-green-500 text-sm font-semibold">10%+</span>
+                </div>
+                <div className="text-sm text-gray-400 font-light">Satisfied customers</div>
+              </div>
+              {/* Process Time and Total Time - Now with glass effect */}
+              <div className="absolute bottom-12 right-4 flex flex-col gap-2 z-20">
+                <div className="bg-white bg-opacity-70 backdrop-blur-sm rounded-lg shadow-sm p-2 text-sm">
+                  <div>
+                    <span>Process time:</span> <span className="font-semibold ml-2">{processTimer}</span>
                   </div>
                 </div>
-
-                {/* Bottom Right Overlay - Hands and Steps - Now with glass effect */}
-                <div className="absolute bottom-4 left-4 bg-white bg-opacity-70 backdrop-blur-sm rounded-lg shadow-sm p-3 text-sm">
-                  <div className="flex items-center gap-2 text-xs">
-                    <div className="flex items-center">
-                      <div className="w-2 h-2 rounded-full bg-green-500 mr-1"></div>
-                      Step 02: 00:13:22
-                    </div>
+                <div className="bg-white bg-opacity-70 backdrop-blur-sm rounded-lg shadow-sm p-2 text-sm">
+                  <div>
+                    Total time: <span className="font-semibold">{totalTimer}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs">
-                    <div className="flex items-center">
-                      <div className="w-2 h-2 rounded-full bg-green-500 mr-1"></div>
-                      Step 03: 00:15:34
-                    </div>
+                </div>
+              </div>
+              {/* Bottom Right Overlay - Hands and Steps - Now with glass effect */}
+              <div className="absolute bottom-4 left-4 bg-white bg-opacity-70 backdrop-blur-sm rounded-lg shadow-sm p-3 text-sm z-20">
+                <div className="flex items-center gap-2 text-xs">
+                  <div className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-green-500 mr-1"></div>
+                    <span>Step 02: </span>   <span className="font-semibold ml-2">{step2Timer}</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-xs">
+                  <div className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-green-500 mr-1"></div>
+                    <span>Step 03: </span> <span className="font-semibold ml-2">{step3Timer}</span>
                   </div>
                 </div>
               </div>
@@ -153,13 +209,14 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Animated Beam Demo */}
-        <div className="mt-16">
-          <h2 className="text-2xl font-bold mb-6 text-center">Build your own AI Agents</h2>
-          <AnimatedBeamDemo />
-        </div>
+        
       </section>
       <WhatWeDoSection />
+      {/* Animated Beam Demo */}
+      <div className="mt-16">
+          <h2 className="text-2xl font-bold  text-center">We Build What You Dream — Fast</h2>
+          <AnimatedBeamDemo />
+        </div>
       <TimeSavingSection />
       <AboutSection />
       <TestimonialsSection 

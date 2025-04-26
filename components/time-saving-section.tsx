@@ -6,7 +6,7 @@ export default function TimeSavingSection() {
       <div className="container mx-auto max-w-5xl">
         {/* Heading and intro text */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">The time you&apos;ll be saving</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Millions of dollars you&apos;ll be saving</h2>
           <p className="text-base md:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
             The launchpad is built by engineers, for engineers. We&apos;ve spent two years in the trenches, building AI
             systems for clients across industries. We&apos;ve made all the mistakes, solved all the problems, and
@@ -18,13 +18,13 @@ export default function TimeSavingSection() {
         <div className="bg-gray-900 text-white rounded-lg overflow-hidden mb-16">
           <div className="p-8 md:p-10">
             <h3 className="text-2xl md:text-3xl font-bold mb-1">
-              Save 90+ hours <span className="text-base font-normal text-gray-400">per project</span>
+              Save $Millions <span className="text-base font-normal text-gray-400">per project</span>
             </h3>
 
             <div className="border-t border-gray-700 my-6"></div>
 
             <p className="mb-8 text-gray-300">
-              We&apos;ve done the heavy lifting, made all the mistakes, and fixed them, so you don&apos;t have to.
+              We&apos;ve done the heavy lifting for you, made all the mistakes, and fixed them, so you don&apos;t have to.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -32,25 +32,26 @@ export default function TimeSavingSection() {
                 <div className="flex items-start gap-2">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
                   <p className="text-sm">
-                    <span className="font-medium">16 hrs</span> saved on Docker configuration
+                    <span className="font-medium">Free </span> Software Consultation
                   </p>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
                   <p className="text-sm">
-                    <span className="font-medium">4 hrs</span> saved on FastAPI setup
+                    <span className="font-medium">Free Project Estimate</span> Rough cost & time for their idea
                   </p>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
                   <p className="text-sm">
-                    <span className="font-medium">4 hrs</span> saved on PostgreSQL integration
+                  <span className="font-medium">Your MVP</span>  build under 48 hours
+                    
                   </p>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
                   <p className="text-sm">
-                    <span className="font-medium">8 hrs</span> saved on Redis & Celery setup
+                  <span className="font-medium">Try Before You Pay</span> Software First Than payments
                   </p>
                 </div>
               </div>
@@ -59,25 +60,25 @@ export default function TimeSavingSection() {
                 <div className="flex items-start gap-2">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
                   <p className="text-sm">
-                    <span className="font-medium">40 hrs</span> saved on AI pipeline configuration
+                  <span className="font-medium">Free </span> Cloud Setup Guide
                   </p>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
                   <p className="text-sm">
-                    <span className="font-medium">2 hrs</span> saved on prompt management
+                  <span className="font-medium">Free</span> App Performance Check  
                   </p>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
                   <p className="text-sm">
-                    <span className="font-medium">2 hrs</span> saved on env variable setup
+                    <span className="font-medium">Free </span> Code Review
                   </p>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
                   <p className="text-sm">
-                    <span className="font-medium">16 hrs</span> saved on deployment troubleshooting
+                    <span className="font-medium">Pay only</span> if You're happy
                   </p>
                 </div>
               </div>

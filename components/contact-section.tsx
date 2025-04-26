@@ -145,7 +145,7 @@ export function ContactSection() {
                     />
                   </div>
 
-                  <Button type="submit" className="w-full md:w-auto gap-2">
+                  <Button type="submit" className="w-full md:w-auto gap-2 bg-black text-white">
                     <Send size={16} />
                     Send Message
                   </Button>
