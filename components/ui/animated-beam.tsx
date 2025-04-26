@@ -50,7 +50,7 @@ export function AnimatedBeam({
     const controlY = (startY + endY) / 2 - curvature
 
     function animate() {
-      if (!ctx) return
+      if (!ctx || !canvas) return
 
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       ctx.strokeStyle = "#e5e7eb"
