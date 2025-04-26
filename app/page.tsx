@@ -172,7 +172,7 @@ export default function Home() {
               {/* Floating Counter Card - fixed at top-right over carousel */}
               <div className="absolute top-4 right-4 bg-white bg-opacity-70 backdrop-blur-sm p-4 rounded-xl shadow-sm z-30">
                 <div className="flex items-end gap-2 pr-8">
-                  <span className="text-4xl font-bold">{useCountUp({ end: 572, duration: 1200 })}</span>
+                  <span className="text-4xl font-bold">{useCountUp({ end: 572, duration: 2200 })}</span>
                   <span className="text-green-500 text-sm font-semibold">10%+</span>
                 </div>
                 <div className="text-sm text-gray-400 font-light">Satisfied customers</div>
